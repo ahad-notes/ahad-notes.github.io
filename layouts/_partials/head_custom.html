@@ -158,6 +158,8 @@
 
 </style>
 
-<link rel="icon" type="image/x-icon" href="{{ "/favicon.ico" | relURL }}">
-<link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | relURL }}">
+{{- $favicon := "favicon.ico" | relURL -}}
+<link rel="icon" href="{{ $favicon }}" sizes="any">
+<link rel="shortcut icon" type="image/x-icon" href="{{ $favicon }}">
+<link rel="apple-touch-icon" href="{{ $favicon }}">
 
