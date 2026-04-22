@@ -1,0 +1,77 @@
+body {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 1.65;
+  font-size: 18px;
+}
+
+.docs-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 2.5rem;
+  width: min(1600px, calc(100vw - 4rem));
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.docs-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding-right: 1.25rem;
+  border-right: 1px solid #ddd;
+}
+
+.docs-main {
+  min-width: 0;
+  width: 100%;
+}
+
+.docs-main pre {
+  overflow-x: auto;
+}
+
+.docs-main img {
+  max-width: 100%;
+  height: auto;
+}
+
+.docs-nav details {
+  margin-bottom: 0.75rem;
+}
+
+.docs-nav summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.docs-nav ul {
+  margin: 0.4rem 0 0.8rem 1rem;
+  padding: 0;
+}
+
+.docs-nav li {
+  margin: 0.35rem 0;
+}
+
+@media (max-width: 1000px) {
+  .docs-shell {
+    grid-template-columns: 1fr;
+    width: min(100%, calc(100vw - 2rem));
+    padding: 1rem;
+  }
+
+  .docs-sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border-right: none;
+    padding-right: 0;
+  }
+}

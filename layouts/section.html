@@ -1,0 +1,22 @@
+{{ partial "header.html" . }}
+
+<div class="docs-shell">
+  <aside class="docs-sidebar">
+    {{ partial "docs-sidebar.html" . }}
+  </aside>
+
+  <main class="docs-main">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    {{ if .Pages }}
+      <ul>
+        {{ range .Pages }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </main>
+</div>
+
+{{ partial "footer.html" . }}

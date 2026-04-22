@@ -1,0 +1,38 @@
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script defer src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".tab-button");
+  const panels = document.querySelectorAll(".tab-panel");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const target = this.dataset.tab;
+
+      buttons.forEach((b) => b.classList.remove("active"));
+      panels.forEach((p) => p.classList.remove("active"));
+
+      this.classList.add("active");
+
+      const targetPanel = document.getElementById(target);
+      if (targetPanel) {
+        targetPanel.classList.add("active");
+      }
+    });
+  });
+});
+</script>

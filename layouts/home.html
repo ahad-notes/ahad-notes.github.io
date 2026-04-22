@@ -1,0 +1,52 @@
+{{ partial "header.html" . }}
+
+<div class="docs-shell">
+  <aside class="docs-sidebar">
+    {{ partial "docs-sidebar.html" . }}
+  </aside>
+
+  <main class="docs-main">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <div class="home-tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" data-tab="hello">hello</button>
+        <button class="tab-button" data-tab="plasma-physics">plasma physics</button>
+        <button class="tab-button" data-tab="machine-learning">machine learning</button>
+        <button class="tab-button" data-tab="papers">papers</button>
+      </div>
+
+      <section id="hello" class="tab-panel active">
+        <h2>what do we got here?</h2>
+        <ul>
+          <li>super in depth undergrad and graduate physics solutions and their discussions.</li>
+          <li>cool codes to help analyze scientific data (yes machine learning too).</li>
+          <li>papers for context in a few corners of physics research.</li>
+          <li>that is most of it. the solutions & their notes in particular took me a humbling amount of time to work through and think about, and even longer to type up, but I cared too much to not immortalize them.</li>
+        </ul>
+      </section>
+
+      <section id="plasma-physics" class="tab-panel">
+        <h3><a href="/introductory-plasma-physics/">introductory plasma physics</a></h3>
+        <h3><a href="/plasma-waves/">plasma waves</a></h3>
+      </section>
+
+      <section id="machine-learning" class="tab-panel">
+        <h2>pending</h2>
+        <ul>
+          <li>my bad</li>
+        </ul>
+      </section>
+
+      <section id="papers" class="tab-panel">
+        <h2>pending</h2>
+        <ul>
+          <li>my bad</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</div>
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,14 @@
+{{ partial "header.html" . }}
+
+<div class="docs-shell">
+  <aside class="docs-sidebar">
+    {{ partial "docs-sidebar.html" . }}
+  </aside>
+
+  <main class="docs-main">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </main>
+</div>
+
+{{ partial "footer.html" . }}

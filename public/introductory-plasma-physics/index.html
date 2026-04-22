@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> | Ahad Notes</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <style>
+  body {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.65;
+    font-size: 18px;
+  }
+
+  .docs-home-link {
+    margin-bottom: 1rem;
+  }
+
+  .docs-home-link a {
+    display: inline-block;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .docs-home-link a:hover {
+    opacity: 0.9;
+  }
+  .docs-shell {
+    display: grid !important;
+    grid-template-columns: 220px minmax(0, 1fr) !important;
+    gap: 2rem !important;
+    width: min(1600px, calc(100vw - 4rem)) !important;
+    margin: 0 auto !important;
+    padding: 2rem !important;
+    box-sizing: border-box;
+  }
+
+  .docs-sidebar {
+    align-self: start;
+    padding-right: 1rem;
+    border-right: 1px solid #ddd;
+  }
+
+  .docs-main {
+    font-size: 15px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .home-tabs {
+    margin-top: 2rem;
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.75rem;
+  }
+
+  .tab-button {
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .tab-button.active {
+    background: #222;
+    color: white;
+    border-color: #222;
+  }
+
+  .tab-panel {
+    display: none;
+    padding-top: 0.5rem;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .docs-nav details {
+    margin-bottom: 0.75rem;
+  }
+
+  .docs-nav summary {
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .docs-nav ul {
+    margin: 0.4rem 0 0.8rem 1rem;
+    padding: 0;
+  }
+
+  .docs-nav li {
+    margin: 0.35rem 0;
+  }
+
+  @media (max-width: 900px) {
+    .docs-shell {
+      grid-template-columns: 1fr !important;
+      width: min(100%, calc(100vw - 2rem)) !important;
+      padding: 1rem !important;
+    }
+
+    .docs-sidebar {
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+
+  .page-toc-box {
+    margin: 1rem 0 2rem 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8f8f8;
+  }
+
+  #TableOfContents ul {
+    margin: 0.5rem 0 0.5rem 1.25rem;
+    padding: 0;
+  }
+
+  #TableOfContents li {
+    margin: 0.3rem 0;
+  }
+
+  #TableOfContents a {
+    text-decoration: none;
+  }
+
+  #TableOfContents a:hover {
+    text-decoration: underline;
+  }
+
+  .docs-nav details details {
+    margin-top: 0.5rem;
+    margin-left: 0.75rem;
+  }
+
+  .docs-nav details details summary {
+    font-weight: 500;
+  }
+
+  .docs-nav ul ul {
+    margin-top: 0.4rem;
+    margin-left: 1rem;
+  }
+
+</style>
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+    </ul>
+    <hr/>
+    </nav>
+
+
+<div class="docs-shell">
+  <aside class="docs-sidebar">
+    <nav class="docs-nav">
+  <div class="docs-home-link">
+    <a href="/">ahad-notes</a>
+  </div>
+
+  <details>
+    <summary>Plasma Physics</summary>
+    <ul>
+      <li><a href="/introductory-plasma-physics/">Introductory Plasma Physics</a></li>
+
+      <li>
+        <details open>
+          <summary>Plasma Waves</summary>
+          <ul>
+            <li><a href="/plasma-waves/">Overview</a></li>
+            <li><a href="/plasma-waves/EM-CPDR/">Solution Set 1: E&amp;M and CPDR</a></li>
+            <li><a href="/plasma-waves/fluids/">Solution Set 2: Fluids</a></li>
+            <li><a href="/plasma-waves/kinetics/">Solution Set 3: Kinetics</a></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Machine Learning</summary>
+    <ul>
+      <li><a href="#">Coming soon</a></li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Papers</summary>
+    <ul>
+      <li><a href="#">Coming soon</a></li>
+    </ul>
+  </details>
+</nav>
+  </aside>
+
+  <main class="docs-main">
+    <h1></h1>
+    
+
+    
+  </main>
+</div>
+
+  <footer>
+  <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script defer src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".tab-button");
+  const panels = document.querySelectorAll(".tab-panel");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const target = this.dataset.tab;
+
+      buttons.forEach((b) => b.classList.remove("active"));
+      panels.forEach((p) => p.classList.remove("active"));
+
+      this.classList.add("active");
+
+      const targetPanel = document.getElementById(target);
+      if (targetPanel) {
+        targetPanel.classList.add("active");
+      }
+    });
+  });
+});
+</script>
+  
+  </footer>
+  </body>
+</html>

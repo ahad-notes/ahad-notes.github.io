@@ -1,0 +1,11 @@
+baseURL = 'https://ahad-notes.github.io/'
+languageCode = 'en-us'
+title = 'Ahad Notes'
+theme = 'hugo-xmin'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+
