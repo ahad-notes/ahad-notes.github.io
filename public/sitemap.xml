@@ -8,6 +8,10 @@
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
+    <loc>http://localhost:1313/computational-plasma-physics/</loc>
+  </url><url>
+    <loc>http://localhost:1313/plasma-qa/</loc>
+  </url><url>
     <loc>http://localhost:1313/plasma-waves/</loc>
   </url><url>
     <loc>http://localhost:1313/plasma-waves/em-cpdr/</loc>
