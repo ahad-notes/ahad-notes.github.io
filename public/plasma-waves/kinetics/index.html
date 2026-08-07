@@ -672,6 +672,41 @@ a:active {
   color: #2e1065;
   background: #f7f0ff;
 }
+
+ 
+.site-footer {
+  width: min(1600px, calc(100vw - 4rem));
+  margin: 0 auto 2rem auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.site-footer-inner {
+  padding: 1rem 1.25rem;
+}
+
+.site-footer a,
+.site-footer a:visited {
+  color: var(--purple);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:visited:hover {
+  color: var(--purple-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    width: min(100%, calc(100vw - 2rem));
+    padding: 0 1rem;
+  }
+}
 </style>
 
 
@@ -846,6 +881,59 @@ a:active {
       });
     });
   });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".home-tabs").forEach(function (tabs) {
+      const buttons = Array.from(tabs.querySelectorAll(".tab-button"));
+      const panels = Array.from(tabs.querySelectorAll(".tab-panel"));
+
+      function activateTab(tabId) {
+        buttons.forEach(function (button) {
+          const isActive = button.dataset.tab === tabId;
+
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        panels.forEach(function (panel) {
+          panel.classList.toggle("active", panel.id === tabId);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          activateTab(button.dataset.tab);
+        });
+      });
+    });
+  });
+</script>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+
+<script
+  async
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+<script
+  defer
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script><link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
@@ -914,52 +1002,370 @@ a:active {
 
   <main class="docs-main">
     <h1>solution set 3: kinetics</h1>
-    
+    <p>$\to$ <a href="#i">I. Laundau damping</a></p>
+<p>$\to$ <a href="#ii">II. Instability of ion acoustic wave</a></p>
+<h2 id="summary-of-my-solutions-on-this-page">Summary of my solutions on this page</h2>
+<div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
+<p>Oh boy, kinetic description of plasmas. [vlasov, etc etc, further physics like landau damping] [lot of math and complex analysis wowowowo]</p>
+<p>[explain what langmuir waves are]</p>
+</div>
+<hr>
+<h1 id="i">I</h1>
+<h4 id="consider-landau-damping-of-langmuir-waves-for-a-plasma-in-which-there-are-two-populations-of-electrons-maxwellian-and-beam-the-normalized-distribution-function-in-one-dimension-is-given-by">Consider Landau damping of Langmuir waves for a plasma in which there are two populations of electrons: Maxwellian and beam. The normalized distribution function in one dimension is given by:</h4>
+$$
+f_0(v_x) = \chi \left(\frac{1}{\pi v_{th,m}^2} \right)^{1/2} e^{-\left(\frac{v_x}{v_{th,m}}\ \right)^2} + (1-\chi) \left(\frac{1}{\pi v_{th,b}} \right)^{1/2} e^{-\left(\frac{v_x - v_b}{v_{th,b}} \right)^2}
+$$<h4 id="where--is-the-ratio-of-the-maxwellian-population-density--to-the-plasma-density--here--is-the-beam-velocity--and--are-the-thermal-velocities-of-the-maxwellian-and-beam-electrons-respectively-we-will-split-tasks-to-deal-with-this-setup-in-5-sections">Where $\chi = n_m/n_0$ is the ratio of the Maxwellian population density, $n_m$, to the plasma density, $n_0 = n_m + n_b$. Here, $v_b$ is the beam velocity. $v_{th,m}$ and $v_{th,b}$ are the thermal velocities of the Maxwellian and beam electrons, respectively. We will split tasks to deal with this setup in 5 sections.</h4>
+<hr>
+<ol>
+<li>
+<h5 id="find-a-general-expression-for-">Find a general expression for $\omega_i / \omega_p$.</h5>
+</li>
+</ol>
+<p>The below dispersion relation includes CPDR, fluid description (Bohm-Gross), and kinetic description (last term) of plasma waves. It is essentially Landau&rsquo;s solution to the dispersion relation using Vlasov&rsquo;s kinetic equation for waves in a thermal, unmagnetized plasma. More crucially, it is the Landau solution for just a Maxwellian distribution function. We will begin with this simplified description.</p>
+$$
+D(k, \omega) = 1 - \frac{\omega_{pe}^2}{\omega^2} \left(1 + \frac{3 v_{th}^2}{v_{\phi}^2} \right) - \frac{ i \pi \omega_{pe}^2}{k^2} \frac{\partial f_0}{\partial v_x} \Bigg|_{v_x = \frac{\omega}{k}}=0
+$$<p>With $\omega = \omega_r + i \omega_i$ we also have the real and imaginary components of the dispersion relation:</p>
+$$
+D_r (k, \omega) = 1 - \frac{\omega_{pe}^2}{\omega^2} - \frac{3 \omega_{pe}^2 v_{th}^2}{\omega^2 v_{\phi}^2}, \quad D_i = -\pi \frac{\omega_{pe}^2}{k^2} \frac{\partial f_0}{\partial v_x} \Bigg|_{v_x = \frac{\omega}{k}}
+$$$$
+D_r(k, \omega) = 1-\frac{\omega_{pe}^2}{\omega^2} - \frac{3 \omega_{pe}^2 v_{th}^2}{\omega^2 v_{\phi}^2} = 1 - \frac{\omega_{pe}^2}{\omega^2} - \frac{3 \omega_{pe}^2 k^2 v_{th}^2}{\omega^4}
+$$<p>Landau damping is an inherently weak perturbation, so we will take $|\omega_i| \ll \omega_r$. Using the Taylor expansion relationship $f(x+\delta) \approx f(x) + \delta f^{\prime} (x)$:</p>
+$$
+D(\omega_r + i \omega_i) \approx D(\omega_r) + (i \omega_i) \frac{\partial D}{\partial \omega} \Bigg|_{\omega_r} = 0
+$$<p>$(i \omega_i) \frac{\partial D_i}{\partial \omega} \Bigg|_{\omega_r} = 0 $ and $D_r(\omega_r) =0$ so we expand as such:</p>
+$$
+D(\omega_r + i \omega_i) \approx  i D_i(\omega_r)+ (i\omega_i) \frac{\partial D_r}{\partial \omega} \Bigg|_{\omega_r}  = 0
+$$$$
+i D_i (\omega_r) + i \omega_i \frac{\partial D_r}{\partial \omega} \Bigg|_{\omega_r} = 0
+$$$$
+\omega_i = \frac{-D_i (\omega_r)}{\frac{\partial D_r}{\partial \omega} \Big|_{\omega_r}}
+$$<p>Ok cool note that. Let&rsquo;s calculate the derivative in the denominator:</p>
+$$
+D_r = 1 - \omega_{pe}^2 \omega^{-2} - 3 \omega_{pe}^2 k^2 v_{th}^2 \omega^{-4}
+$$$$
+\frac{\partial D_r}{\partial \omega} \Bigg|_{\omega_r} = 2 \omega_{pe}^2 \omega^{-3} +12 \omega_{pe}^2 k^2 v_{th}^2 \omega^{-5} \Bigg|_{\omega = \omega_r} = \frac{2\omega_{pe}^2}{\omega_r^3} + \frac{12\omega_{pe}^2 k^2 v_{th}^2}{\omega_r^5}
+$$<p>Now we plug in $D_i$ and $\frac{\partial D_r}{\partial \omega}$ for $\omega_i$:</p>
+$$
+\omega_i = -\frac{- \pi \frac{\omega_{pe}^2}{k^2} \frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega_r / k}}{\frac{2 \omega_{pe}^2}{\omega_r^3} + \frac{12 \omega_{pe}^2 k^2 v_{th}^2}{\omega_r^5}}
+$$<p>Let&rsquo;s simplify this crazy mess.</p>
+$$
+\omega_i = \frac{\pi \frac{\omega_{pe}^2}{k^2} \frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega_r / k}}{\frac{2\omega_{pe}^2}{\omega_r^3}\left(1+ \frac{6k^2 v_{th}^2}{\omega_r^2} \right)}
+$$$$
+\omega_i = \frac{\pi \omega_r^3}{2 k^2} \frac{\frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega_r/k}}{1+ \frac{6k^2v_{th}^2}{\omega_r^2}}
+$$<p>Vlasov&rsquo;s solution is examined in the limit of $v_{\phi} \gg v_{th}$. And so (noting that $k^2 = \omega^2 / v_{\phi}^2$):</p>
+$$
+\frac{ v_{th}^2}{v_{\phi}^2} \approx 0
+$$<p>We also take that $\omega_r \approx \omega_p$ for this kinetic derivation:</p>
+$$
+\omega_i = \frac{\pi \omega_{pe}^3}{2k^2} \frac{\frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega_{pe} / k}}{1} = \frac{\pi \omega_{pe}^3}{2k^2} \frac{\partial f_0}{\partial v_x} \Bigg|_{v_x = \omega_{pe} / k}
+$$<p>Excellent. Let&rsquo;s now figure out the partial derivative of the distribution function $f_0$ for the two populations of electrons. Starting with the Maxwellian contribution:</p>
+$$
+\frac{d}{d v_x} \left(\chi \frac{1}{\sqrt{\pi} v_{th,m}} e^{-v_x^2 / v_{th,m}^2} \right) = -\frac{2 \chi v_x}{\sqrt{\pi} v_{th,m}^3} e^{-v_x^2 / v_{th,m}^2}
+$$<p>And then the beam contribution:</p>
+$$
+\frac{d}{d v_x} \left((1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} e^{-(v_x - v_b)^2 / v_{th,b}^2} \right) = \frac{-2(1-\chi)(v_x - v_b)}{\sqrt{\pi} v_{th,b}^3} e^{-(v_x - v_b)^2 / v_{th,b}^2}
+$$<p>Plugging these two into $\omega_i$ (and note that we&rsquo;re evaluating for $v_x = v_{\phi}$):</p>
+$$
+\omega_i = - \sqrt{\pi} \frac{\omega_{pe}^3}{k^2} \left(\chi \frac{ v_{\phi}}{ v_{th,m}^3} e^{-v_{\phi}^2 / v_{th,m}^2}  + (1-\chi) \frac{v_{\phi} - v_b}{ v_{th,b}^3} e^{-(v_{\phi} - v_b)^2 / v_{th,b}^2} \right)
+$$<p>Using $ \omega_{pe} \approx \omega_r$ and $v_{\phi} = \omega_r / k$:</p>
+$$
+\frac{\omega_i}{\omega_{pe}} = -\sqrt{\pi} \left(\chi \frac{v_{\phi}^3}{v_{th,m}^3} e^{-v_{\phi}^2 / v_{th,m}^2} + (1 - \chi) \frac{v_{\phi}^2 (v_{\phi} - v_b)}{v_{th,b}^3} e^{-(v_{\phi} - v_b)^2 / v_{th,b}^2} \right)
+$$<p>nice</p>
+<ol start="2">
+<li>
+<h5 id="on-one-graph-plot--versus--for--ms--ms-and--ms-for-three-values-of--on-a-new-graph-plot--for-the-above-conditions-what-do-we-see-from-these-two-graphs">On one graph, plot $\omega_i / \omega_p$ versus $v_{\phi} = \omega /k$ for $v_{th,m} = 10^6$ m/s, $v_{th,b} = 5 \times 10^5$ m/s, and $v_b = 2 \times 10^6 $ m/s, for three values of $\chi = 0.99, 0.95, 0.90$. On a new graph, plot $f_0(v_x)$ for the above conditions. What do we see from these two graphs?</h5>
+</li>
+</ol>
+<p>Not too complicated of a code is needed for the first graph:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># parameters</span>
+</span></span><span style="display:flex;"><span>v_th_m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0e6</span>   
+</span></span><span style="display:flex;"><span>v_th_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.0e5</span>   
+</span></span><span style="display:flex;"><span>v_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0e6</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Xs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.99</span>, <span style="color:#ae81ff">0.95</span>, <span style="color:#ae81ff">0.90</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vphi_min <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>vphi_max <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.0e6</span>
+</span></span><span style="display:flex;"><span>npts <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v_phi <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(vphi_min, vphi_max, npts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># function for omega_i / omega_p</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">omega_i_over_omega_p</span>(v_phi, X, v_th_m, v_th_b, v_b):
+</span></span><span style="display:flex;"><span>    term_maxwellian <span style="color:#f92672">=</span> X <span style="color:#f92672">*</span> (v_phi <span style="color:#f92672">/</span> v_th_m)<span style="color:#f92672">**</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span>(v_phi<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (v_th_m<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    term_beam <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> X) <span style="color:#f92672">*</span> (v_phi<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (v_phi <span style="color:#f92672">-</span> v_b) <span style="color:#f92672">/</span> v_th_b<span style="color:#f92672">**</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span>((v_phi <span style="color:#f92672">-</span> v_b)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> (v_th_b<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sqrt(np<span style="color:#f92672">.</span>pi) <span style="color:#f92672">*</span> (term_maxwellian <span style="color:#f92672">+</span> term_beam)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plot</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> X <span style="color:#f92672">in</span> Xs:
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> omega_i_over_omega_p(v_phi, X, v_th_m, v_th_b, v_b)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot(v_phi, y, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">fr</span><span style="color:#e6db74">&#39;$X = </span><span style="color:#e6db74">{</span>X<span style="color:#e6db74">}</span><span style="color:#e6db74">$&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(v_b, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1.2</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$v_b$&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$v_{\phi} = \omega/k \ \mathrm{(m/s)}$&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$\omega_i/\omega_p$&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;Landau growth/damping rate vs phase velocity&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">13</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid(<span style="color:#66d9ef">True</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ticklabel_format(style<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sci&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, scilimits<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><img src="landau.png" width="750">
+<p>Code for the second graph:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>vx_min <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3.0e6</span>
+</span></span><span style="display:flex;"><span>vx_max <span style="color:#f92672">=</span> <span style="color:#ae81ff">4.5e6</span>
+</span></span><span style="display:flex;"><span>npts <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(vx_min, vx_max, npts)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Langmuir distribution function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f0</span>(v_x, X, v_th_m, v_th_b, v_b):
+</span></span><span style="display:flex;"><span>    maxwellian <span style="color:#f92672">=</span> X <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> v_th_m<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>))<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span>(v_x <span style="color:#f92672">/</span> v_th_m)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    beam <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> X) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> v_th_b<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>))<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span>((v_x <span style="color:#f92672">-</span> v_b) <span style="color:#f92672">/</span> v_th_b)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> maxwellian <span style="color:#f92672">+</span> beam
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># def</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> X <span style="color:#f92672">in</span> Xs:
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> f0(v_x, X, v_th_m, v_th_b, v_b)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot(v_x, y, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">fr</span><span style="color:#e6db74">&#39;$X = </span><span style="color:#e6db74">{</span>X<span style="color:#e6db74">}</span><span style="color:#e6db74">$&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(v_b, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1.2</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$v_b$&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$v_x \ \mathrm{(m/s)}$&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$f_0(v_x)$&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;Langmuir waves electron distribution function $f_0(v_x)$&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">13</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid(<span style="color:#66d9ef">True</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ticklabel_format(style<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sci&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, scilimits<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><img src="distribution.png" width="750">
+<p>Here&rsquo;s what I notice that makes physical and mathematical sense from these graphs:</p>
+<ul>
+<li>
+<p>The sign of $\omega_i$ is controlled by the slope $\frac{\partial f_0}{\partial v} \Big|_{v_{\phi}}$.</p>
+</li>
+<li>
+<p>The Maxwellian background gives ordinary Landau damping because its slope is negative for $v>0$.</p>
+</li>
+<li>
+<p>However, the beam creates a bump near $v_b$, giving positive slope for $v_{\phi} < v_b$ and negative slope for $v_{\phi} > v_b$ on $f_0(v_x)$ (for smaller $\chi$s).</p>
+</li>
+<li>
+<p>Therefore, for lower $\chi$s at least, waves with phase velocity just below the beam speed grow unstable, while waves just above the beam speed are damped.</p>
+</li>
+<li>
+<p>Lastly, lower $\chi$ means a stronger beam, which increases both the instability on the left side of the beam velocity and the damping on the right side.</p>
+</li>
+</ul>
+<ol start="3">
+<li>
+<h5 id="consider-the-case-above-with--for---calculate-the-ratio--where--is-the-maximum-growth-rate-and--is-the-electron-thermal-equilibriation-rate-can-be-found-in-the-nrl-plasma-formulary-repeat-for---comment-on-your-results">Consider the case above with $\chi = 0.90$. For $n_0 = 10^{18}$ $\text{m}^{-3}$, calculate the ratio $\omega_{i,max} / \nu_e$, where $\omega_{i,max}$ is the maximum growth rate and $\nu_e$ is the electron thermal equilibriation rate (can be found in the NRL Plasma Formulary). Repeat for $10^{21}$ $\text{m}^{-3}$. Comment on your results.</h5>
+</li>
+</ol>
+<p>The following code makes these calculations in a clean manner:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>X <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.90</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># physical constants</span>
+</span></span><span style="display:flex;"><span>m_e <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.1094e-31</span>     
+</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.6022e-19</span>      
+</span></span><span style="display:flex;"><span>eps0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8.8542e-12</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># numerically find max growth</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> omega_i_over_omega_p(v_phi, X, v_th_m, v_th_b, v_b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>imax <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(y)
+</span></span><span style="display:flex;"><span>vphi_max <span style="color:#f92672">=</span> v_phi[imax]
+</span></span><span style="display:flex;"><span>omega_i_over_omega_p_max <span style="color:#f92672">=</span> y[imax]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;v_phi,max = </span><span style="color:#e6db74">{</span>vphi_max<span style="color:#e6db74">:</span><span style="color:#e6db74">.6e</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> m/s&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;(omega_i/omega_p)_max = </span><span style="color:#e6db74">{</span>omega_i_over_omega_p_max<span style="color:#e6db74">:</span><span style="color:#e6db74">.10f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># convert v_th,m to T_e in eV</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># using f ~ exp[-(v/v_th)^2], so v_th = sqrt(2 kT / m)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># =&gt; T_e[eV] = m_e v_th^2 / (2 e)</span>
+</span></span><span style="display:flex;"><span>T_e_eV <span style="color:#f92672">=</span> m_e <span style="color:#f92672">*</span> v_th_m<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> e)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;T_e = </span><span style="color:#e6db74">{</span>T_e_eV<span style="color:#e6db74">:</span><span style="color:#e6db74">.6f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> eV&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NRL Coulomb log for thermal e-e collisions</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># n in cm^-3, T in eV</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lnLambda_ee</span>(ne_cm3, Te_eV):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">23.5</span> <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>log(ne_cm3<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> Te_eV<span style="color:#f92672">**</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.25</span>)) <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1e-5</span> <span style="color:#f92672">+</span> (np<span style="color:#f92672">.</span>log(Te_eV) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">16.0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NRL electron collision rate</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># nu_e = 2.91e-6 * n_e * lnLambda * T_e^(-3/2) [s^-1]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># n_e in cm^-3, T_e in eV</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">nu_e</span>(ne_cm3, Te_eV):
+</span></span><span style="display:flex;"><span>    ll <span style="color:#f92672">=</span> lnLambda_ee(ne_cm3, Te_eV)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2.91e-6</span> <span style="color:#f92672">*</span> ne_cm3 <span style="color:#f92672">*</span> ll <span style="color:#f92672">*</span> Te_eV<span style="color:#f92672">**</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span>), ll
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plasma frequency </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">omega_p</span>(ne_m3):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sqrt(ne_m3 <span style="color:#f92672">*</span> e<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> (eps0 <span style="color:#f92672">*</span> m_e))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># evaluate for the two n_0 densities</span>
+</span></span><span style="display:flex;"><span>densities_m3 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1e18</span>, <span style="color:#ae81ff">1e21</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n0_m3 <span style="color:#f92672">in</span> densities_m3:
+</span></span><span style="display:flex;"><span>    ne_cm3 <span style="color:#f92672">=</span> n0_m3 <span style="color:#f92672">/</span> <span style="color:#ae81ff">1e6</span>
+</span></span><span style="display:flex;"><span>    wp <span style="color:#f92672">=</span> omega_p(n0_m3)
+</span></span><span style="display:flex;"><span>    wi_max <span style="color:#f92672">=</span> omega_i_over_omega_p_max <span style="color:#f92672">*</span> wp
+</span></span><span style="display:flex;"><span>    nue, lnL <span style="color:#f92672">=</span> nu_e(ne_cm3, T_e_eV)
+</span></span><span style="display:flex;"><span>    ratio <span style="color:#f92672">=</span> wi_max <span style="color:#f92672">/</span> nue
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">-----------------------------------&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;n0 = </span><span style="color:#e6db74">{</span>n0_m3<span style="color:#e6db74">:</span><span style="color:#e6db74">.3e</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> m^-3&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;n_e = </span><span style="color:#e6db74">{</span>ne_cm3<span style="color:#e6db74">:</span><span style="color:#e6db74">.3e</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> cm^-3&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ln Lambda_ee = </span><span style="color:#e6db74">{</span>lnL<span style="color:#e6db74">:</span><span style="color:#e6db74">.6f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;omega_p = </span><span style="color:#e6db74">{</span>wp<span style="color:#e6db74">:</span><span style="color:#e6db74">.6e</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> s^-1&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;omega_i,max = </span><span style="color:#e6db74">{</span>wi_max<span style="color:#e6db74">:</span><span style="color:#e6db74">.6e</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> s^-1&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;nu_e = </span><span style="color:#e6db74">{</span>nue<span style="color:#e6db74">:</span><span style="color:#e6db74">.6e</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> s^-1&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;omega_i,max / nu_e = </span><span style="color:#e6db74">{</span>ratio<span style="color:#e6db74">:</span><span style="color:#e6db74">.6e</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>Output:</p>
+<pre tabindex="0"><code>v_phi,max = 1.748916e+06 m/s
+(omega_i/omega_p)_max = 0.4456305447
+T_e = 2.842779 eV
+
+-----------------------------------
+n0 = 1.000e+18 m^-3
+n_e = 1.000e+12 cm^-3
+ln Lambda_ee = 10.751641
+omega_p = 5.641534e+10 s^-1
+omega_i,max = 2.514040e+10 s^-1
+nu_e = 6.527595e+06 s^-1
+omega_i,max / nu_e = 3.851403e+03
+
+-----------------------------------
+n0 = 1.000e+21 m^-3
+n_e = 1.000e+15 cm^-3
+ln Lambda_ee = 7.297764
+omega_p = 1.784010e+12 s^-1
+omega_i,max = 7.950092e+11 s^-1
+nu_e = 4.430658e+09 s^-1
+omega_i,max / nu_e = 1.794337e+02
+</code></pre><p>So for the smaller density:</p>
+$$
+\frac{\omega_{i,max}}{\nu_e} \approx 3.85 \times 10^3
+$$<p>And for the larger density:</p>
+$$
+\frac{\omega_{i,max}}{\nu_e} \approx 1.79 \times 10^2
+$$<p>In both cases, the instability growth rate is larger than the equilibriation rate, so the wave evolution is much faster than thermal equilibriation. This implies less collisions. Also, as $n_0$ increases, the maximum growth rate $\omega_{i,max}$ increases because it scales with the plasma frequency, $\omega_p \propto \sqrt{n_0}$. However, the electron thermal equilibriation rate $\nu_e$ increases even faster with density, roughly directly proportional. So the ratio $\omega_{i,max}/\nu_0$ decreases with increasing density.</p>
+<ol start="4">
+<li>
+<h5 id="lets-return-to-part-1-where-we-already-assumed-a-dispersion-relation-to-use-for-our-particular-distribution-function-well-rederive-the-dispersion-relation-for--is-the-bohm-gross-dispersion-relation-bgdr-modified-by-the-beam-how-about-the-equation-for-">Let&rsquo;s return to part 1 where we already assumed a dispersion relation to use for our particular distribution function. Well, rederive the dispersion relation for $f_0(v_x)$. Is the Bohm-Gross Dispersion Relation (BGDR) modified by the beam? How about the equation for $\omega_i$?</h5>
+</li>
+</ol>
+<p>Below is the general dispersion relation that includes Vlasov&rsquo;s solution and collisionless wave damping called Landau damping which is what we&rsquo;ve been talking about all this time of course.</p>
+$$
+D(\omega, k) = 1 +\frac{n_0 e^2}{\varepsilon_0 m k} \left(\operatorname{Pr} \int_{-\infty}^{\infty} \frac{\partial f_0 / \partial v_x}{\omega - k v_x} d v_x - \frac{i\pi}{k} \frac{\partial f_0}{\partial v_x} \Bigg|_{v_x=\omega/k} \right)
+$$$$
+= 1 + \frac{\omega_p^2}{k} \left(\operatorname{Pr} \int_{-\infty}^{\infty} \frac{\partial f_0 / \partial v_x}{\omega - k v_x} d v_x - \frac{i\pi}{k} \frac{\partial f_0}{\partial v_x} \Bigg|_{v_x=\omega/k} \right)
+$$<p>Integral by parts:</p>
+$$
+\int_{-\infty}^{\infty} \frac{\partial f_0}{\partial v_x} \frac{d v_x}{\omega - k v_x} = \frac{1}{k} \int_{-\infty}^{\infty} \frac{\partial f_0}{\partial v_x} \frac{d v_x}{\frac{\omega}{k} -v_x} = -\frac{1}{k} \int_{-\infty}^{\infty} \frac{\partial f_0}{\partial v_x} \frac{d v_x}{v_x - v_{\phi}} = -\frac{1}{k} \left (\frac{f_0}{v_x - v_{\phi}} \Bigg|_{-\infty}^{\infty} \right) + \frac{1}{k} \int_{-\infty}^{\infty} \frac{-f_0}{(v_x - v_{\phi})^2} dv_x
+$$$$
+= - \frac{1}{k} \int_{-\infty}^{\infty} \frac{f_0}{(v_x - v_{\phi})^2} dv_x
+$$<p>If $v_x \gg v_{\phi}$, we expand $(v_x - v_{\phi})^{-2}$:</p>
+$$
+(v_x - v_{\phi})^{-2} = v_{\phi}^{-2} \left(1 - \frac{v_x}{v_{\phi}} \right)^{-2}
+$$$$
+= v_{\phi}^{-2} \left(1 + \frac{2v_x}{v_{\phi}} + \frac{3 v_x^2}{v_{\phi}^2} + \frac{4 v_x^3}{v_{\phi}^3} + ... \right)
+$$<p>We do not have a symmetric distribution function for$v_x$ so we will keep the odd term $\frac{2 v_x}{v_{\phi}}$ although we can drop the higher order term $\frac{4v_x^3}{v_{\phi}^3}$:</p>
+$$
+\int_{-\infty}^{\infty} \frac{\partial f_0}{\partial v_x} \frac{d v_x}{\omega - k v_x} = -\frac{1}{k} \int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} \left(1 + \frac{2v_x}{v_{\phi}} + \frac{3v_x^2}{v_{\phi}^2} \right) dv_x
+$$$$
+= -\frac{1}{k} \left(\int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} dv_x + \int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} \left(\frac{2v_x}{v_{\phi}}\right) dv_x + \int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} \left(\frac{3v_x^2}{v_{\phi}^2} \right) dv_x \right)
+$$<p>Before integrating each piece, consider the below Gaussian integrals to help us:</p>
+$$
+\int_{-\infty}^{\infty} e^{-u^2} du = \sqrt{\pi}
+$$$$
+\int_{-\infty}^{\infty} u e^{-u^2} du = 0
+$$$$
+\int_{-\infty}^{\infty} u^2 e^{-u^2} du = \frac{\sqrt{\pi}}{2}
+$$<p>Let&rsquo;s start with the first integral:</p>
+$$
+\int_{-\infty}^{\infty} f_0 dv_x = \chi \left(\frac{1}{\pi v_{th,m}^2} \right)^{1/2} \int_{-\infty}^{\infty} e^{-(v_x/v_{th,m})^2} dv_x + (1-\chi) \left(\frac{1}{\pi v_{th,b}^2} \right)^{1/2} \int_{-\infty}^{\infty} e^{((v_x - v_b)/v_{th,b})^2} dv_x
+$$<p>Substitutions: $u = \frac{v_x}{v_{th,m}} \to du = \frac{1}{v_{th,m}} dv_x$ and $v = \frac{v_x - v_b}{v_{th,b}} \to dv = \frac{1}{v_{th,b}} dv_x$.</p>
+$$
+\int_{-\infty}^{\infty} f_0 dv_x = \chi \left(\frac{1}{\pi v_{th,m}^2} \right)^{1/2} \int_{-\infty}^{\infty} v_{th,m} e^{-u^2} du + (1-\chi) \left(\frac{1}{\pi v_{th,b}^2} \right)^{1/2} \int_{-\infty}^{\infty} v_{th,b} e^{-v^2} dv
+$$$$
+= \chi \frac{1}{\sqrt{\pi} v_{th,m}} v_{th,m} \sqrt{\pi} + (1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} v_{th,b} \sqrt{\pi} = 1
+$$<p>The second integral using the same substitutions:</p>
+$$
+\int_{-\infty}^{\infty} f_0 v_x dv_x = \chi \frac{1}{\sqrt{\pi} v_{th,m}} \int_{-\infty}^{\infty} v_x e^{-(v_x/v_{th,m})^2} dv_x +(1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} \int_{-\infty}^{\infty} v_x e^{-((v_x-v_b)/ v_{th,b})^2} dv_x
+$$$$
+= \chi \frac{1}{\sqrt{\pi} v_{th,m}} \int_{-\infty}^{\infty} v_{th,m}^2 u e^{-u^2} du + (1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} \int_{-\infty}^{\infty} (v v_{th,b} + v_b) e^{-v^2} v_{th,b} dv
+$$$$
+= 0 + (1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} \left(\int_{-\infty}^{\infty} v v_{th,b}^2 e^{-v^2} dv + \int_{-\infty}^{\infty} v_b v_{th,b} e^{-v^2} dv \right)
+$$$$
+= (1-\chi) \frac{1}{\sqrt{\pi}} v_b \sqrt{\pi} = (1-\chi) v_b
+$$<p>Using the same substitutions a third time for the third integral (with $v_x^2 = u^2 v_{th,m}^2$ and $v_x^2=(v v_{th,b} + v_b)^2$):</p>
+$$
+\int_{-\infty}^{\infty} f_0 v_x^2 dv_x = \chi \frac{1}{\sqrt{\pi} v_{th,m}} \int_{-\infty}^{\infty} v_x^2 e^{-(v_x / v_{th,m})^2} dv_x + (1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} \int_{-\infty}^{\infty} v_x^2 e^{-((v_x - v_b)/v_{th,b})^2} dv_x
+$$$$
+= \chi \frac{1}{\sqrt{\pi} v_{th,m}} \int_{-\infty}^{\infty} u^2 v_{th,m}^3 e^{-u^2} du + (1-\chi) \frac{1}{\sqrt{\pi} v_{th,b}} \int_{-\infty}^{\infty} (v_{th,b} v + v_b)^2 e^{-v^2} dv v_{th,b}
+$$$$
+= \chi \frac{1}{\sqrt{\pi}} v_{th,m}^2 \frac{\sqrt{\pi}}{2} + (1-\chi) \frac{1}{\sqrt{\pi}} \int_{-\infty}^{\infty} (v_{th,b}^2 v^2 + 2v_{th,b} v_b v + v_b^2) e^{-v^2} dv
+$$$$
+=\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \frac{1}{\sqrt \pi} \left(\int_{-\infty}^{\infty} v_{th,b}^2 v^2 e^{-v^2} dv + \int_{-\infty}^{\infty} 2v_{th,b} v_b v e^{-v^2} dv + \int_{-\infty}^{\infty} v_b^2 e^{-v^2} dv \right)
+$$$$
+=\frac{\chi}{2} v_{th,m}^2 + (1-\chi )\frac{1}{\sqrt{\pi}} \left(v_{th,b}^2 \frac{\sqrt{\pi}}{2} + 0 + v_b^2 \sqrt{\pi} \right)
+$$$$
+= \frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} + v_b^2 \right)
+$$<p>Now we can return to solving the integral in $D(k, \omega)$ using the above Gaussian integrals:</p>
+$$
+\int_{-\infty}^{\infty} \frac{\partial f_0}{\partial v_x} \frac{dv_x}{\omega - k v_x} = -\frac{1}{k} \left( \int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} dv_x + \int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} \left( \frac{2 v_x}{v_{\phi}} \right) dv_x + \int_{-\infty}^{\infty} \frac{f_0}{v_{\phi}^2} \left(\frac{3v_x^2}{v_{\phi}^2} \right ) dv_x \right)
+$$$$
+= -\frac{1}{k} \left (\frac{1}{v_{\phi}^2} + \frac{2(1-\chi) v_b}{v_{\phi}^2 v_{\phi}} + \frac{3 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi)\left(\frac{v_{th,b}^2}{2} + v_b^2 \right) \right)}{v_{\phi}^2v_{\phi}^2} \right)
+$$$$
+= -\frac{1}{k} \left(\frac{1}{\left(\frac{\omega}{k} \right)^2} + \frac{2(1-\chi) v_b}{\left(\frac{\omega}{k} \right)^2 v_{\phi}} + \frac{3 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} +v_b^2 \right) \right)}{\left(\frac{\omega}{k} \right)^2 v_{\phi}^2} \right)
+$$$$
+= -\frac{k}{\omega^2} \left(1 + \frac{2(1-\chi)v_b}{v_{\phi}} + \frac{3 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} +v_b^2 \right) \right)}{v_{\phi}^2} \right)
+$$$$
+\frac{\omega_p^2}{k} \left(\operatorname{Pr} \int_{-\infty}^{\infty} \frac{\partial f_0 / \partial v_x}{\omega - kv_x} dv_x \right)= -\frac{\omega_p^2}{\omega^2} \left(1 + \frac{2(1-\chi)v_b}{v_{\phi}} + \frac{3 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} +v_b^2 \right) \right)}{v_{\phi}^2} \right)
+$$<p>And now the derived dispersion relation for our distribution function:</p>
+$$
+D(\omega, k) = 1 -\frac{\omega_p^2}{\omega^2} \left(1 + \frac{2(1-\chi)v_b}{v_{\phi}} + \frac{3 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} +v_b^2 \right) \right)}{v_{\phi}^2} \right) - \frac{i\pi \omega_p^2}{k^2} \frac{\partial f_0}{\partial v_x} \Bigg|_{v_x = \omega/k} 
+$$<p>Our fluid BGDR is different now, indicating that a beam distribution function does modify it.</p>
+<p>Now let&rsquo;s look at the growth/damping rate $\omega_i$. From part 1:</p>
+$$
+\omega_i = -\frac{D_i(\omega_r)}{\frac{\partial D_r}{\partial \omega} \Big|_{\omega_r}}
+$$$$
+D_r(\omega,k) = 1-\frac{\omega_p^2}{\omega^2} - \frac{2(1-\chi)v_b \omega_p^2 k}{\omega^3} - \frac{3 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} + v_b^2 \right) \right) \omega_p^2 k^2}{\omega^4}
+$$$$
+\frac{\partial D_r}{\partial \omega} \Bigg|_{\omega_r} = \frac{2\omega_p^2}{\omega_r^3}+ \frac{6(1-\chi) v_b \omega_p^2 k}{\omega_r^4} + \frac{12 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} + v_b^2 \right) \right) \omega_p^2 k^2}{\omega_r^5}
+$$$$
+\omega_i = \frac{\frac{\pi \omega_p^2}{k^2} \frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega/k}}{\frac{2 \omega_p^2}{\omega_r^3} \left(1+ \frac{3(1-\chi) v_b k}{\omega_r} + \frac{6 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} + v_b^2 \right) \right) k^2}{\omega_r^2} \right)}
+$$$$
+\omega_i = \frac{\pi \omega_r^3}{2 k^2} \frac{\frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega/k}}{ 1+ \frac{3(1-\chi) v_b k}{\omega_r} + \frac{6 \left(\frac{\chi}{2} v_{th,m}^2 + (1-\chi) \left(\frac{v_{th,b}^2}{2} + v_b^2 \right) \right) k^2}{\omega_r^2}}
+$$$$
+\omega_i = \frac{\pi \omega_r^3}{2 k^2} \frac{\frac{\partial f_0}{\partial v_x} \Big|_{v_x = \omega/k}}{ 1+ \frac{3 (1-\chi) v_b}{v_{\phi}} + \frac{3\chi v_{th,m}^2}{v_{\phi}^2} + (1-\chi)\left(\frac{3 v_{th,b}^2}{v_{\phi}^2} + \frac{6v_b^2}{v_{\phi}^2} \right)}
+$$<p>Assuming $v_{\phi} \gg v_{th,m}$, $v_{\phi} \gg v_{th,b}$, and $\omega_r \approx \omega_p$:</p>
+$$
+\omega_i = \frac{\pi \omega_p^3}{2k^2} \frac{\frac{\partial f_0}{\partial v_x}\Big|_{v_x=\omega/k}}{1+\frac{3(1-\chi)v_b}{v_{\phi}} + \frac{6 (1-\chi) v_b^2}{v_{\phi}^2}}
+$$<p>From part 1:</p>
+$$
+\frac{\partial f_0}{\partial v_x} \Bigg|_{v_x=v_{\phi}} = -\frac{2 \chi v_{\phi}}{\sqrt{\pi} v_{th,m}^3} e^{-v_{\phi}^2 / v_{th,m}^2} - \frac{2 (1-\chi) (v_{\phi} - v_b)}{\sqrt{\pi} v_{th,b}^3} e^{-(v_{\phi} - v_b)^2 / v_{th,b}^2}
+$$<p>And we get an equation for Landau damping that is also modified by the beam:</p>
+$$
+\omega_i = -\sqrt{\pi} \frac{\omega_p^3}{k^2} \left(\frac{\frac{ \chi v_{\phi}}{ v_{th,m}^3} e^{-v_{\phi}^2 / v_{th,m}^2} + \frac{ (1-\chi) (v_{\phi} - v_b)}{ v_{th,b}^3} e^{-(v_{\phi} - v_b)^2 / v_{th,b}^2}}{1+\frac{3(1-\chi)v_b}{v_{\phi}} + \frac{6 (1-\chi) v_b^2}{v_{\phi}^2}} \right)
+$$<p>
+nice</p>
+
 
     
   </main>
 </div>
 
-  <footer>
-  <script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-};
-</script>
-
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<script defer src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".tab-button");
-  const panels = document.querySelectorAll(".tab-panel");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const target = this.dataset.tab;
-
-      buttons.forEach((b) => b.classList.remove("active"));
-      panels.forEach((p) => p.classList.remove("active"));
-
-      this.classList.add("active");
-
-      const targetPanel = document.getElementById(target);
-      if (targetPanel) {
-        targetPanel.classList.add("active");
-      }
-    });
-  });
-});
-</script>
-  
-  </footer>
-  </body>
-</html>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>Email me:</span>
+    <a href="mailto:ahad.ather@outlook.com">ahad.ather@outlook.com</a>
+  </div>
+</footer>

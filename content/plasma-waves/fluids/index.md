@@ -7,12 +7,20 @@ $\to$ [I. Alfvén waves](#i)
 
 $\to$ [II. LFDR Stringer diagrams](#ii)
 
+$\to$ [III. Two-stream instability](#iii)
+
 
 ## Summary of my solutions on this page
 
 
 <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
-hello
+It is my honor to introduce the following solutions of problems pertaining to treating plasma as a fluid with a bulk velocity and pressure and density and etc etc. We get so much further cool physics and waves and instabilities. 
+
+We start by deriving two famous MHD waves: the shear and compressional Alfvén waves, knowing that we can see these waves even in a cold fluid plasma. 
+
+Next, we take a look at the governing dispersion relation for plasma fluids - the Low Frequency Dispersion Relation - which can be reduced to a cubic function with three branches of coupling waves. See for yourself a couple versions of Stringer plots that display fluid waves in different regions of frequency and wavenumber. 
+
+We then start with the fluid equations to analyze an instability that arises from two electron streams propagating together in opposite directions. We can even analytically derive the maximum rate at which this particular instability grows.
 
 </div>
 
@@ -570,3 +578,262 @@ y= x \sqrt{\frac{v_A^2}{c_s^2}+1 } \approx x \frac{v_A}{c_s}
 $$
 
 So now the O1 branch starts with the magnetoacoustic wave then couples to the compressional Alfvén wave. 
+
+--------
+
+# III
+
+#### Derive the dispersion relation for a two-stream instability occurring when there are two electron streams with equal and opposite velocity, $\mathbf{u_0}$, in a background of fixed ions. Each stream has density $n_0/2$. Also calculate the maximum growth rate, $\omega_{i, \text{max}}$.
+
+--------
+
+The 0th order variables are for the two electron streams:
+
+$$
+\mathbf{v_{0_1}} = \mathbf{u_0}, \quad \mathbf{v_{0_1}} =  - \mathbf{u_0}
+$$
+
+$$
+n_{0_1} = n_{0_2} = \frac{n_0}{2}, \quad n_{i_0} = n_0
+$$
+
+Here we will include small perturbation for the two electron streams ($j=1,2$):
+
+$$
+n_j = n_{0_j} + n_{1_j}, \quad \mathbf{v_j} = \mathbf{v_{0_j}} + \mathbf{v_{1_j}}, \quad \mathbf{E} = \mathbf{E_1}
+$$
+
+The following is our linearized momentum equation with no pressure nor magnetic Lorentz contribution:
+
+$$
+m_e \left(\frac{\partial \mathbf{v_{1_j}}}{\partial t} + (\mathbf{v_{0_j}} \cdot \nabla) \mathbf{v_{1_j}} \right) = -e \mathbf{E_1}
+$$
+
+Fourier wizardry:
+
+$$
+m_e (-i \omega + ik v_{0_j}) v_{1_j} = -eE_1 \to v_{1_j} = - \frac{ie}{m_e} \frac{E_1}{(\omega - k v_{0_j})}
+$$
+
+Ok note that. Let's check out continuity equation now:
+
+$$
+\frac{\partial \rho_i}{\partial t} + \nabla \cdot (p_j \mathbf{v_j}) = 0 
+$$
+
+$$
+\frac{\partial n_{1_j}}{\partial t} + \nabla \cdot ((n_{0_j} + n_{1_j})(\mathbf{v_{0_j}} + \mathbf{v_{1_j}})) = 0
+$$
+
+$$
+\frac{\partial n_{1_j}}{\partial t} + \frac{\partial}{\partial x} (n_{0_j} v_{0_j} + n_{0_j} v_{1_j} + n_{1_j} v_{0_j} + n_{1_j} v_{1_j})
+$$
+
+We don't care about $n_{0_j} v_{0_j}$ and $n_{1_j} v_{1_j}$.
+
+$$
+\frac{\partial n_{1_j}}{\partial t} + n_{0_j} \frac{\partial v_{1_j}}{\partial x} + v_{0_j} \frac{\partial n_{1_j}}{\partial x} = 0
+$$
+
+$$
+\left(\frac{\partial}{\partial t} + v_{0_j} \frac{\partial}{\partial x} \right) n_{1_j} + n_{0_j} \frac{\partial v_{1_j}}{\partial x} = 0 
+$$
+
+$$
+(-i \omega + ik v_{0_j}) n_{1_j} + ik n_{0_j} v_{1_j} = 0
+$$
+
+$$
+n_{1_j} = \frac{-ik n_{0_j} v_{1_j}}{-i\omega + i k v_{0_j}}
+$$
+
+$$
+n_{1_j} = \frac{k n_{0_j}}{\omega - k v_{0_j}} v_{1_j}
+$$
+
+From momentum we know what $v_{1_j}$ is:
+
+$$
+n_{1_j} = \frac{k n_{0_j}}{\omega - k v_{0_j}} \left(-\frac{ie}{m_e} \frac{E_1}{(\omega - k v_{0_j})} \right)
+$$
+
+$$
+n_{1_j} = -\frac{i e k n_{0_j}}{m_e} \frac{E_1}{(\omega - k v_{0_j})^2}
+$$
+
+Note that. Here's Poisson's equation:
+
+$$
+\nabla \cdot \mathbf{E} = -\frac{e}{\varepsilon_0}(n_{1_1} + n_{1_2})
+$$
+
+$$
+ik E_1 = -\frac{e}{\varepsilon_0} (n_{1_1} + n_{1_2})
+$$
+
+Plugging in expression for $n_{1_j}$:
+
+$$
+ik E_1 = -\frac{e}{\varepsilon_0} \sum_{j=1}^2 \left(- \frac{i e k n_{0_j}}{m_e} \frac{E_1}{(\omega - k v_{0_j})^2} \right)
+$$
+
+$$
+1 = \frac{e^2}{ \varepsilon_0 m_e} \sum_{j=1}^2 \left(\frac{n_{0_j}}{(\omega - k v_{0_j})^2} \right)
+$$
+
+Plasma frequency is $\omega_{p_j}^2 = \frac{n_{0_j} e^2}{m_e \varepsilon_0}$:
+
+$$
+1 = \sum_{j=1}^2 \frac{\omega_{p_j}^2}{(\omega - k v_{0_j})^2}
+$$
+
+$$
+1 - \sum_{j=1}^2 \frac{\omega_{p_j}^2}{(\omega - k v_{0_j})^2} = 0
+$$
+
+Now considering our two-stream electrons with the following constraints:
+
+$$
+v_{0_1} = u_0, \quad v_{0_2} = -u_0, \quad \omega_{p_1}^2 = \frac{n_0}{2} \frac{e^2}{m_e \varepsilon_0}, \quad \omega_{p_2}^2 = \frac{n_0}{2} \frac{e^2}{m_e \varepsilon_0}
+$$
+
+$$
+\omega_{p_1}^2 = \omega_{p_2}^2 = \frac{\omega_p^2}{2} 
+$$
+
+So we can expand the dispersion relation as such:
+
+$$
+1 - \frac{\omega_{p_1}^2}{(\omega - k u_0)^2} - \frac{\omega_{p_2}^2}{(\omega +k u_0)^2} = 0
+$$
+
+$$
+1 - \frac{\omega_p^2}{2} \left(\frac{1}{(\omega-ku_0)^2} + \frac{1}{(\omega + ku_0)^2} \right) = 0 \quad \text{where} \quad \omega_p^2 = \frac{n_0 e^2}{\varepsilon_0 m_e}
+$$
+
+nice
+
+Ok now let's play with this dispersion relation to calculate the maximum growth rate for the two-stream instability of two electron fluids going in opposite directions of each other. 
+
+Let's combine the fractions in the dispersion relation:
+
+$$
+1 = \frac{\omega_p^2}{2} \left(\frac{(\omega +k u_0)^2 + (\omega - ku_0)^2}{(\omega - ku_0)^2 (\omega + ku_0)^2} \right)
+$$
+
+$$
+1 = \frac{\omega_p^2}{2} \left(\frac{\omega^2 +2\omega ku_0 + k^2 u_0^2 + \omega^2 - 2\omega k u_0 + k^2 u_0^2}{(\omega^2 - k^2 u_0^2)^2} \right)
+$$
+
+$$
+1 = \frac{\omega_p^2}{2} \left(\frac{2\omega^2 + 2k^2 u_0^2}{(\omega^2 - k^2u_0^2)^2} \right)
+$$
+
+$$
+(\omega^2 - k^2 u_0^2)^2 - \omega_p^2 (\omega^2 +k^2 u_0^2) = 0
+$$
+
+Let $a = k^2 u_0^2$:
+
+$$
+(\omega^2 - a)^2 - \omega_p^2(\omega^2 + a) = 0
+$$
+
+$$
+\omega^4 - 2\omega^2 a + a^2 - \omega_p^2 \omega^2 - \omega_p^2 a = 0
+$$
+
+$$
+\omega^4 - (2a+\omega_p^2) \omega^2 + (a^2 -\omega_p^2 a) = 0
+$$
+
+Let $x=\omega^2$:
+
+$$
+x^2 - (2a+\omega_p^2)x +(a^2 -\omega_p^2 a) =0 
+$$
+
+$$
+x = \frac{(2a+\omega_p^2) \pm \sqrt{(2a+\omega_p^2)^2 - 4(a^2 - \omega_p^2 a)}}{2}
+$$
+
+$$
+x  = \frac{(2a+\omega_p^2) \pm \sqrt{4a^2 +4a\omega_p^2 + \omega_p^4 -4a^2 +4 \omega_p^2 a}}{2}
+$$
+
+$$
+x = (a+\frac{\omega_p^2}{2}) \pm \frac{1}{2} \sqrt{8a\omega_p^2 + \omega_p^4}
+$$
+
+$$
+x = a+\frac{\omega_p^2}{2} \pm \frac{\omega_p^2}{2} \sqrt{1+\frac{8a}{\omega_p^2}}
+$$
+
+$$
+\omega_{-}^2 = k^2 u_0^2 + \frac{\omega_p^2}{2} - \frac{\omega_p^2}{2} \sqrt{1+ \frac{8k^2 u_0^2}{\omega_p^2}}
+$$
+
+Instability arises when $\omega_{-}^2 < 0$:
+
+$$
+\omega = i \omega_i
+$$
+
+$$
+\omega_{-}^2 = -1(\omega_i^2)
+$$
+
+$$
+\omega_i^2 = -\omega_{-}^2
+$$
+
+$$
+\omega_i^2 = -k^2 u_0^2 - \frac{\omega_p^2}{2} + \frac{\omega_p^2}{2} \sqrt{1+ \frac{8k^2 u_0^2}{\omega_p^2}}
+$$
+
+Maximizing $\omega_i^2$:
+
+$$
+\omega_i^{2 \prime}(k) = -2ku_0^2 + \frac{\omega_p^2}{2} \left(\frac{1}{2} \right) \left(1+ \frac{8k^2 u_0^2}{\omega_p^2} \right)^{-1/2} \left(\frac{16 u_0^2 k}{\omega_p^2} \right) =0
+$$
+
+$$
+\frac{\omega_p^2}{4\sqrt{1+\frac{8k^2 u_0^2}{\omega_p^2}}} \left(\frac{16 u_0^2 k}{\omega_p^2} \right) = 2ku_0^2
+$$
+
+$$
+\frac{2}{\sqrt{1+ \frac{8k^2 u_0^2}{\omega_p^2}}} = 1
+$$
+
+$$
+4  = 1+ \frac{8k^2 u_0^2}{\omega_p^2}
+$$
+
+$$
+k_{\text{max}}^2 = \frac{3}{8} \frac{\omega_p^2}{u_0^2}
+$$
+
+Plugging back in for $\omega_i$:
+
+$$
+\omega_{i_{\text{max}}}^2 = -k_{\text{max}}^2 u_0^2 - \frac{\omega_p^2}{2} + \frac{\omega_p^2}{2} \sqrt{1+\frac{8k_{\text{max}}^2 u_0^2}{\omega_p^2}}
+$$
+
+$$
+\omega_{i_{\text{max}}}^2 = -\frac{3}{8} \frac{\omega_p^2}{u_0^2} u_0^2 - \frac{\omega_p^2}{2} + \frac{\omega_p^2}{2} \sqrt{1 + \frac{8u_0^2}{\omega_p^2} \frac{3}{8} \frac{\omega_p^2}{u_0^2}}
+$$
+
+$$
+\omega_{i_{\text{max}}}^2 = -\frac{3}{8} \omega_p^2 - \frac{1}{2} \omega_p^2 + \frac{1}{2} \omega_p^2 \sqrt{1+3}
+$$
+
+$$
+\omega_{i_{\text{max}}}^2 = \frac{1}{8} \omega_p^2
+$$
+
+$$
+\omega_{i_{\text{max}}} = \frac{\omega_p}{2\sqrt{2}} \quad \text{where} \quad \omega_p = \sqrt{\frac{n_0 e^2}{\varepsilon_0 m_e}}
+$$
+
+nice
+

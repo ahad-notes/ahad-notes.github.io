@@ -664,6 +664,41 @@ a:active {
   color: #2e1065;
   background: #f7f0ff;
 }
+
+/* Site footer */
+.site-footer {
+  width: min(1600px, calc(100vw - 4rem));
+  margin: 0 auto 2rem auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.site-footer-inner {
+  padding: 1rem 1.25rem;
+}
+
+.site-footer a,
+.site-footer a:visited {
+  color: var(--purple);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:visited:hover {
+  color: var(--purple-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    width: min(100%, calc(100vw - 2rem));
+    padding: 0 1rem;
+  }
+}
 </style>
 
 
@@ -842,4 +877,57 @@ a:active {
       });
     });
   });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".home-tabs").forEach(function (tabs) {
+      const buttons = Array.from(tabs.querySelectorAll(".tab-button"));
+      const panels = Array.from(tabs.querySelectorAll(".tab-panel"));
+
+      function activateTab(tabId) {
+        buttons.forEach(function (button) {
+          const isActive = button.dataset.tab === tabId;
+
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        panels.forEach(function (panel) {
+          panel.classList.toggle("active", panel.id === tabId);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          activateTab(button.dataset.tab);
+        });
+      });
+    });
+  });
+</script>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+
+<script
+  async
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+<script
+  defer
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-	<meta name="generator" content="Hugo 0.157.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta name="generator" content="Hugo 0.157.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60139&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ahad-notes | Ahad Notes</title>
@@ -673,6 +673,41 @@ a:active {
   color: #2e1065;
   background: #f7f0ff;
 }
+
+ 
+.site-footer {
+  width: min(1600px, calc(100vw - 4rem));
+  margin: 0 auto 2rem auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.site-footer-inner {
+  padding: 1rem 1.25rem;
+}
+
+.site-footer a,
+.site-footer a:visited {
+  color: var(--purple);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:visited:hover {
+  color: var(--purple-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    width: min(100%, calc(100vw - 2rem));
+    padding: 0 1rem;
+  }
+}
 </style>
 
 
@@ -847,6 +882,59 @@ a:active {
       });
     });
   });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".home-tabs").forEach(function (tabs) {
+      const buttons = Array.from(tabs.querySelectorAll(".tab-button"));
+      const panels = Array.from(tabs.querySelectorAll(".tab-panel"));
+
+      function activateTab(tabId) {
+        buttons.forEach(function (button) {
+          const isActive = button.dataset.tab === tabId;
+
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        panels.forEach(function (panel) {
+          panel.classList.toggle("active", panel.id === tabId);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          activateTab(button.dataset.tab);
+        });
+      });
+    });
+  });
+</script>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+
+<script
+  async
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+<script
+  defer
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script><link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
@@ -922,79 +1010,50 @@ a:active {
 
 
     <div class="home-tabs">
-      <div class="tab-buttons">
-        <button class="tab-button active" data-tab="hello">hello</button>
-        <button class="tab-button" data-tab="plasma-physics">plasma physics</button>
-        <button class="tab-button" data-tab="papers & research">papers & research</button>
-      </div>
+  <div class="tab-buttons" role="tablist">
+    <button class="tab-button active" type="button" data-tab="hello" role="tab" aria-selected="true">
+      hello
+    </button>
 
-      <section id="hello" class="tab-panel active">
-        <h2>what do we got here?</h2>
-        <ul>
-          <li>super in depth undergrad and graduate physics solutions and their discussions.</li>
-          <li>cool codes to help analyze scientific data (yes machine learning too).</li>
-          <li>papers for context in a few corners of physics research.</li>
-          <li>that is most of it. the solutions & their notes in particular took me a humbling amount of time to work through and think about, and even longer to type up, but I cared too much to not immortalize them.</li>
-        </ul>
-      </section>
+    <button class="tab-button" type="button" data-tab="plasma-physics" role="tab" aria-selected="false">
+      plasma physics
+    </button>
 
-      <section id="plasma-physics" class="tab-panel">
-        <h3><a href="/plasma-qa/">plasma Q&A</a></h3>
-        <h3><a href="/introductory-plasma-physics/">introductory plasma physics</a></h3>
-        <h3><a href="/plasma-waves/">plasma waves</a></h3>
-        <h3><a href="/computational-plasma-physics/">computational plasma physics</a></h3>
-      </section>
+    <button class="tab-button" type="button" data-tab="papers-research" role="tab" aria-selected="false">
+      papers & research
+    </button>
+  </div>
 
-      <section id="papers & research" class="tab-panel">
-        <h2>pending</h2>
-        <ul>
-          <li>my bad</li>
-        </ul>
-      </section>
-    </div>
+  <section id="hello" class="tab-panel active" role="tabpanel">
+    <h2>what do we got here?</h2>
+    <ul>
+      <li>super in depth undergrad and graduate physics solutions and their discussions.</li>
+      <li>cool codes to help analyze scientific data (yes machine learning too).</li>
+      <li>papers for context in a few corners of physics research.</li>
+      <li>that is most of it. the solutions & their notes in particular took me a humbling amount of time to work through and think about, and even longer to type up, but I cared too much to not immortalize them.</li>
+    </ul>
+  </section>
+
+  <section id="plasma-physics" class="tab-panel" role="tabpanel">
+    <h3><a href="/plasma-qa/">plasma Q&A</a></h3>
+    <h3><a href="/introductory-plasma-physics/">introductory plasma physics</a></h3>
+    <h3><a href="/plasma-waves/">plasma waves</a></h3>
+    <h3><a href="/computational-plasma-physics/">computational plasma physics</a></h3>
+  </section>
+
+  <section id="papers-research" class="tab-panel" role="tabpanel">
+    <h2>pending</h2>
+    <ul>
+      <li>my bad</li>
+    </ul>
+  </section>
+</div>
   </main>
 </div>
 
-  <footer>
-  <script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-};
-</script>
-
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<script defer src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".tab-button");
-  const panels = document.querySelectorAll(".tab-panel");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const target = this.dataset.tab;
-
-      buttons.forEach((b) => b.classList.remove("active"));
-      panels.forEach((p) => p.classList.remove("active"));
-
-      this.classList.add("active");
-
-      const targetPanel = document.getElementById(target);
-      if (targetPanel) {
-        targetPanel.classList.add("active");
-      }
-    });
-  });
-});
-</script>
-  
-  </footer>
-  </body>
-</html>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>Email me:</span>
+    <a href="mailto:ahad.ather@outlook.com">ahad.ather@outlook.com</a>
+  </div>
+</footer>

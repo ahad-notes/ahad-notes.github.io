@@ -2,24 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/introductory-plasma-physics/</loc>
+    <loc>http://localhost:60139/introductory-plasma-physics/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:60139/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:60139/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/computational-plasma-physics/</loc>
+    <loc>http://localhost:60139/computational-plasma-physics/</loc>
   </url><url>
-    <loc>http://localhost:1313/plasma-qa/</loc>
+    <loc>http://localhost:60139/plasma-qa/</loc>
   </url><url>
-    <loc>http://localhost:1313/plasma-waves/</loc>
+    <loc>http://localhost:60139/plasma-waves/</loc>
   </url><url>
-    <loc>http://localhost:1313/plasma-waves/em-cpdr/</loc>
+    <loc>http://localhost:60139/plasma-waves/em-cpdr/</loc>
   </url><url>
-    <loc>http://localhost:1313/plasma-waves/fluids/</loc>
+    <loc>http://localhost:60139/plasma-waves/fluids/</loc>
   </url><url>
-    <loc>http://localhost:1313/plasma-waves/kinetics/</loc>
+    <loc>http://localhost:60139/plasma-waves/kinetics/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://localhost:60139/tags/</loc>
   </url>
 </urlset>

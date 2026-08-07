@@ -2,24 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ahad-notes on Ahad Notes</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:60139/</link>
     <description>Recent content in ahad-notes on Ahad Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:60139/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>computational methods for plasmas</title>
-      <link>http://localhost:1313/computational-plasma-physics/</link>
+      <link>http://localhost:60139/computational-plasma-physics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/computational-plasma-physics/</guid>
+      <guid>http://localhost:60139/computational-plasma-physics/</guid>
       <description></description>
     </item>
     <item>
       <title>plasma Q&amp;A</title>
-      <link>http://localhost:1313/plasma-qa/</link>
+      <link>http://localhost:60139/plasma-qa/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/plasma-qa/</guid>
+      <guid>http://localhost:60139/plasma-qa/</guid>
       <description></description>
+    </item>
+    <item>
+      <title>solution set 2: fluids</title>
+      <link>http://localhost:60139/plasma-waves/fluids/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60139/plasma-waves/fluids/</guid>
+      <description>&lt;p&gt;$\to$ &lt;a href=&#34;#i&#34;&gt;I. Alfvén waves&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;$\to$ &lt;a href=&#34;#ii&#34;&gt;II. LFDR Stringer diagrams&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;$\to$ &lt;a href=&#34;#iii&#34;&gt;III. Two-stream instability&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;summary-of-my-solutions-on-this-page&#34;&gt;Summary of my solutions on this page&lt;/h2&gt;&#xA;&lt;div style=&#34;border: 1px solid #ccc; padding: 1rem; border-radius: 8px;&#34;&gt;&#xD;&#xA;It is my honor to introduce the following solutions of problems pertaining to treating plasma as a fluid with a bulk velocity and pressure and density and etc etc. We get so much further cool physics and waves and instabilities. &#xD;&#xA;&lt;p&gt;We start by deriving two famous MHD waves: the shear and compressional Alfvén waves, knowing that we can see these waves even in a cold fluid plasma.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

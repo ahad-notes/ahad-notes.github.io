@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60139&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>404 Page not found | Ahad Notes</title>
@@ -672,6 +672,41 @@ a:active {
   color: #2e1065;
   background: #f7f0ff;
 }
+
+ 
+.site-footer {
+  width: min(1600px, calc(100vw - 4rem));
+  margin: 0 auto 2rem auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.site-footer-inner {
+  padding: 1rem 1.25rem;
+}
+
+.site-footer a,
+.site-footer a:visited {
+  color: var(--purple);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:visited:hover {
+  color: var(--purple-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    width: min(100%, calc(100vw - 2rem));
+    padding: 0 1rem;
+  }
+}
 </style>
 
 
@@ -846,6 +881,59 @@ a:active {
       });
     });
   });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".home-tabs").forEach(function (tabs) {
+      const buttons = Array.from(tabs.querySelectorAll(".tab-button"));
+      const panels = Array.from(tabs.querySelectorAll(".tab-panel"));
+
+      function activateTab(tabId) {
+        buttons.forEach(function (button) {
+          const isActive = button.dataset.tab === tabId;
+
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        panels.forEach(function (panel) {
+          panel.classList.toggle("active", panel.id === tabId);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          activateTab(button.dataset.tab);
+        });
+      });
+    });
+  });
+</script>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+
+<script
+  async
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+<script
+  defer
+  id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script><link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
@@ -861,47 +949,9 @@ a:active {
 
 404 NOT FOUND
 
-  <footer>
-  <script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-};
-</script>
-
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<script defer src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".tab-button");
-  const panels = document.querySelectorAll(".tab-panel");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const target = this.dataset.tab;
-
-      buttons.forEach((b) => b.classList.remove("active"));
-      panels.forEach((p) => p.classList.remove("active"));
-
-      this.classList.add("active");
-
-      const targetPanel = document.getElementById(target);
-      if (targetPanel) {
-        targetPanel.classList.add("active");
-      }
-    });
-  });
-});
-</script>
-  
-  </footer>
-  </body>
-</html>
-
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>Email me:</span>
+    <a href="mailto:ahad.ather@outlook.com">ahad.ather@outlook.com</a>
+  </div>
+</footer>
