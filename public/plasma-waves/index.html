@@ -964,6 +964,7 @@ a:active {
           <summary>Introductory Plasma Physics</summary>
           <ul>
             <li><a href="/introductory-plasma-physics/">Overview</a></li>
+            <li><a href="/introductory-plasma-physics/electromagnetism/">Solution Set 1: Electromagnetism</a></li>
           </ul>
         </details>
       </li>
@@ -1007,7 +1008,94 @@ a:active {
 <p><em>Solutions adopted from coursework in the University of Washington&rsquo;s AA 556 - Space and Laboratory Plasma Physics.</em></p>
 <p><strong>Some things I wish I grasped intuitively before ever starting to study plasma waves:</strong></p>
 <blockquote>
-<p>Dispersion relation is</p>
+<p>How do waves occur in plasmas? Well, a wave is governed by a restoring force, and in a plasma that restoring force may come from electric fields, magnetic tension, pressure gradients (like sound waves), or a combination of them.</p>
+</blockquote>
+<blockquote>
+<p>A sinusoidal wave is usually written as $\propto e^{i(\mathbf{k} \cdot \mathbf{r} - \omega t)} $. $k = 2\pi / \lambda $ tells us the spatial scale and $\omega = 2\pi f$ tells us how fast the disturbance oscillates in time.</p>
+</blockquote>
+<blockquote>
+<p>The above assumption is so nice because the derivatives become simple multiplication - $\frac{\partial}{\partial t} \to -i \omega, \quad \nabla \to i k$. So differential equations like Maxwell&rsquo;s equations or fluid equations become algebraic equations.</p>
+</blockquote>
+<blockquote>
+<p>You will hear the term &ldquo;dispersion relation&rdquo; at a frequency of 1178263718236123187 Hz. It&rsquo;s just (not to marginalize it) an equation relating $\omega$ and $k$ via the form $D(\omega, k) =0$. It says: if you try to launch a disturbance with wavelength $2\pi / k$, these are the frequencies at which the plasma can naturally support it. A dispersion relation can have multiple roots where each root is a different physical wave branch. So ONE dispersion relation mathematical equation can therefore contain Langmuir waves, ion waves, electromagnetic waves, whistler waves, cyclotron modes, etc etc.</p>
+</blockquote>
+<blockquote>
+<p>The shape of a $\omega (k)$ curve tells us a lot of physics. A flat branch means frequency barely depends on wavelength. A linear branch, like $\omega = vk$, describes a wave traveling at a constant speed.</p>
+</blockquote>
+<blockquote>
+<p>Phase velocity is $v_{\phi} = \frac{\omega}{k}$ and it&rsquo;s the velocity of a wave crest. Group velocity is $v_g = \frac{d\omega}{dk}$ and it&rsquo;s the velocity of a wave packet and it&rsquo;s the velocity at which energy propagates. For an electromagnetic wave, the phase velocity can be larger than the group velocity which is the speed of light. In other words, we can only send information at the speed of light (obeying the laws of the universe), and not at a potentially faster phase velocity existing in the electric or magnetic field.</p>
+</blockquote>
+<blockquote>
+<p>A plasma is called dispersive when waves of different $k$ travel differently, meaning $\omega / k$ (phase velocity!) depends on $k$. Plasma waves are very often dispersive because the particles have natural frequencies and length scales.</p>
+</blockquote>
+<blockquote>
+<p>The electron plasma frequency $\left(\omega_{pe} = \sqrt{\frac{n_e e^2}{m_e \varepsilon_0}} \right)$ is the natural oscillation frequency of electrons against relatively stationary ions. If electrons are displaced slightly, charge separation creates an electric field that pulls them back. This process repeats to create an electron plasma frequency.</p>
+</blockquote>
+<blockquote>
+<p>The cyclotron frequency is $\omega_{c, s} = \frac{|q_s| B_0}{m_s}$ which is the natural gyrofrequency of a species $s$ around a magnetic field. Because electrons are much lighter, $|\omega_{c,e}| \gg |\omega_{c,i}|$.</p>
+</blockquote>
+<blockquote>
+<p>This immediately divides plasma wave physics into frequency regimes. For instance, at very low frequencies both ions and electrons can respond to the magnetic field. And at frequencies above $\omega_{ci}$, ions may no longer follow the oscillation well, while electrons still can.</p>
+</blockquote>
+<blockquote>
+<p>A magnetic field makes a plasma anisotropic. Parallel to $\mathbf{B_0}$, particle move relatively freely. Perpendicular to $\mathbf{B_0}$, their motion is constrained by gyromotion. Therefore, the angle between $k$ and $B_0$ changes the wave physics dramatically.</p>
+</blockquote>
+<blockquote>
+<p>If $\mathbf{k} \parallel \mathbf{B_0}$, the wave propagates along the field. If $\mathbf{k} \perp \mathbf{B_0}$, it propagates across it.</p>
+</blockquote>
+<blockquote>
+<p>The baseline plasma waves model is cold plasma theory, where the response of the plasma current from an applied electromagnetic perturbation is summarized by a dielectric tensor: $\mathbf{D} = \overset{\leftrightarrow}{\mathbf{\varepsilon}} \cdot \mathbf{E}$. It is a tensor rather than a scalar because magnetized plasma responds differently parallel and perpendicular to $\mathbf{B_0}$.</p>
+</blockquote>
+<blockquote>
+<p>The cold plasma dispersion relation (CPDR) is basically obtaining by considering the particle equation of motion, the current response (see bullet point above), and Maxwell&rsquo;s equations. We solve for which combinations of $\omega$, $k$, and polarization allow for a nonzero electromagnetic field.</p>
+</blockquote>
+<blockquote>
+<p>Polarization tells us how the electric field oscillates. It might be linear, circular, or elliptical. In magnetized plasma, right-handed and left-handed circularly polarized waves behave different because charged particle themselves gyrate in a preferred direction. You will find plasma waves that will be left-handed and right-handed.</p>
+</blockquote>
+<blockquote>
+<p>A strong interaction happens when the wave frequency appraoches a particle&rsquo;s natural gyrofrequency: $\omega ~ \omega_{c ,s}$. This is cyclotron resonance - the particle can repeatedly receive energy from the wave because the wave rotates at roughly the same rate as the particle.</p>
+</blockquote>
+<blockquote>
+<p>A cutoff is a frequency below or above which a particular wave cannot propagate, usually giving imaginery $k$. Conversely, a resonance is where the plasma response becomes very large. Cutoffs and resonances are central features of cold plasma dispersion diagrams.</p>
+</blockquote>
+<blockquote>
+<p>Now - fluids. A fluid description does not track individual particles, but replaces them with fields such as $n_s(\mathbf{x}, t)$ (species number density), $\mathbf{u}_s (\mathbf{x}, t)$ (species fluid bulk velocity), $P_s(\mathbf{x}, t)$ (species pressure).</p>
+</blockquote>
+<blockquote>
+<p>The basic fluid equations are just conservation laws. Continuity says particles are conserved: $\frac{\partial n}{\partial t} + \nabla \cdot (n \mathbf{u}) = 0$.</p>
+</blockquote>
+<blockquote>
+<p>The fluid momentum equation is basically Newton&rsquo;s second law for a whole species: $m n \frac{d \mathbf{u}}{d t} = qn (\mathbf{E} + \mathbf{u} \times \mathbf{B}) - \nabla P$. Electric fields, magnetic fields, and pressure gradients accelerate the fluid.</p>
+</blockquote>
+<blockquote>
+<p>Adding pressure introduces a new restoring mechanism. Density compression raises pressure, which pushes the plasma back outward. That&rsquo;s why thermal effects produce sound like plasma waves.</p>
+</blockquote>
+<blockquote>
+<p>Furthermore, ion-acoustic waves are basically sound waves for a plasma. The ions provide most of the inertia, while electron pressure provides much of the restoring force: $\omega = k c_s$.</p>
+</blockquote>
+<blockquote>
+<p>You&rsquo;ll also hear about Alfvén waves a lot, which are magnetic-tensino waves. The magnetic field behaves kind of like a stretched string, and bending that field line creates magnetic tension, and plasma mass provides inertia via the Alfvén speed: $v_A = \frac{B_0}{\sqrt{\mu_0 \rho}}$, $\omega = k v_A$.</p>
+</blockquote>
+<blockquote>
+<p>You&rsquo;ll find that a lot of the set up of our problems look something like this: $n = n_0 + n_1$, $\mathbf{u} = \mathbf{u}_0 + \mathbf{u}_1$, $\mathbf{E} = \mathbf{E}_0 + \mathbf{E}_1$. This is our equilibrium, where the subscript 1 quantities are small perturbations. And linearization means discarding products of small perturbations. For instance if $n_1$ and $u_1$ are both small then $n_1 u_1$ is second-order small and is neglected.</p>
+</blockquote>
+<blockquote>
+<p>The third description of plasmas we&rsquo;ll look into in our problem sets is the kinetic description, which replaces $n$, $\mathbf{u}$, $P$ with a distribution function $f(\mathbf{x}, \mathbf{v}, t)$. Instead of asking what&rsquo;s the average velocity? We ask how many particles have each velocity.</p>
+</blockquote>
+<blockquote>
+<p>Density is recovered from kinetic theory by integration over velocity: $n= \int f d^3 v $. We can take moments of this to get fluid velocity and pressure.</p>
+</blockquote>
+<blockquote>
+<p>The collisionless kinetic equation is the Vlasov equation: $\frac{\partial f}{\partial t} + \mathbf{v} \cdot \nabla f + \frac{q}{m} (\mathbf{E} + \mathbf{v} \times \mathbf{B}) \cdot \nabla_v f =0$.</p>
+</blockquote>
+<blockquote>
+<p>Landau damping is a special physics derived from kinetic plasmas where, for instance in Maxwellian distribution, the wave transfers its energy into particles, causing the wave amplitude to decay even without collisions.</p>
+</blockquote>
+<blockquote>
+<p>A kinetic dispersion relation often gives $\omega = \omega_r + i \gamma$. The real part $\omega_r$ is the oscillation frequency. The imaginary part tells you whether the wave grows or damps. $\gamma > 0$: instability, $\gamma < 0$: damping.</p>
+</blockquote>
+<blockquote>
+<p>Plasma instabilities are basically waves that extract free energy from a non-equilibrium plasma. Some energy sources could be beams, temperature anisotropy, density gradients, currents, and velocity shear.</p>
 </blockquote>
 
 

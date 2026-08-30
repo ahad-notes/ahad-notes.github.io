@@ -964,6 +964,7 @@ a:active {
           <summary>Introductory Plasma Physics</summary>
           <ul>
             <li><a href="/introductory-plasma-physics/">Overview</a></li>
+            <li><a href="/introductory-plasma-physics/electromagnetism/">Solution Set 1: Electromagnetism</a></li>
           </ul>
         </details>
       </li>
@@ -1006,8 +1007,9 @@ a:active {
 <p>$\to$ <a href="#ii">II. Instability of ion acoustic wave</a></p>
 <h2 id="summary-of-my-solutions-on-this-page">Summary of my solutions on this page</h2>
 <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
-<p>Oh boy, kinetic description of plasmas. [vlasov, etc etc, further physics like landau damping] [lot of math and complex analysis wowowowo]</p>
-<p>[explain what langmuir waves are]</p>
+<p>Oh boy, kinetic description of plasmas. The math here is quite a bit more on the involved side. You&rsquo;ll have to blame Vlasov for thinking of a solution to the dispersion relation for his namesake kinetic equations. Yet, kinetics is a more accurate description of plasmas since the limitations of a cold plasma (no finite temperature effects) and fluid plasma (phase velocity &raquo; thermal velocity) are removed. You&rsquo;ll also have to blame Landau for the coolest result of kinetic plasma physics - Landau damping - where from taking a Laplace transform of the kinetics dispersion relation, another term is yielded. A term that underlines collisionless wave damping.</p>
+<p>We will begin with using Landau&rsquo;s solution to derive a damping rate, but taking into consideration two populations of electrons. Spoiler - an electron beam population can result in a Landau instability when that beam dominates. We also derive the analytically true dispersion relation for our particular setup of Langmuir waves. Oh, and Langmuir waves are high frequency, electrostatic oscillations of electrons in a plasma relative to much heavior ions. That&rsquo;s why I&rsquo;m saying electron a lot.</p>
+<p>We also consider another instability arising from an electron drift - but in an ion acoustic wave. We find the current density driving this wave unstable. Again, this crucially becomes unstable not because of collisions but because of incredible physics behavior from looking at plasma via a distribution function of velocities. Namely, kinetics.</p>
 </div>
 <hr>
 <h1 id="i">I</h1>
@@ -1357,6 +1359,67 @@ $$
 \omega_i = -\sqrt{\pi} \frac{\omega_p^3}{k^2} \left(\frac{\frac{ \chi v_{\phi}}{ v_{th,m}^3} e^{-v_{\phi}^2 / v_{th,m}^2} + \frac{ (1-\chi) (v_{\phi} - v_b)}{ v_{th,b}^3} e^{-(v_{\phi} - v_b)^2 / v_{th,b}^2}}{1+\frac{3(1-\chi)v_b}{v_{\phi}} + \frac{6 (1-\chi) v_b^2}{v_{\phi}^2}} \right)
 $$<p>
 nice</p>
+<hr>
+<h1 id="ii">II</h1>
+<h4 id="estimate-the-current-density-in--required-to-drive-the-ion-acoustic-wave-unstable-for--and-">Estimate the current density (in $\text{A}/\text{m}^2$) required to drive the ion acoustic wave unstable for $T_e/T_i =10$ and $T_e/T_i=20$.</h4>
+<hr>
+<p>The Landau damping rate for acoustic waves is as follows (where $c_s$ is the sound speed):</p>
+$$
+\gamma_{L_i} = \frac{1}{2} \sqrt{\frac{\pi}{2}} k c_s \left(\sqrt{\frac{m_e}{m_i}} + \left(\frac{T_e}{T_i} \right)^{3/2} e^{-T_e / 2T_i} \right)
+$$<p>Where $c_s = \frac{k T_e}{m_i}$ for $T_e \gg T_i$. And note that $\omega_r = k c_s$.</p>
+<p>So, the Landau damping of ion acoustic waves can actually be rendered unstable if one adds drift to the electrons (hence driving current). This is in effect what is called inverse Landau damping. As such, the above Landau damping growth rate is without that drift that would cause instability.</p>
+<p>Here is the Maxwellian with electron drift:</p>
+$$
+f_{0_e} (v_x) = \frac{1}{\sqrt{2\pi} v_{th, e}} e^{-(v_x - v_e)^2 / 2v_{th,e}^2}
+$$$$
+\frac{\partial f_{0_e}}{\partial v_x} = \frac{1}{\sqrt{2\pi} v_{th,e}} \left(\frac{-2(v_x-v_e)}{2v_{th,e}^2} \right) e^{-(v_x - v_e)^2 / 2v_{th,e}^2} = -\frac{v_x - v_e}{\sqrt{2\pi} v_{th,e}^3} e^{-(v_x - v_e)^2 / 2v_{th,e}^2}
+$$$$
+\frac{\partial f_{0_e}}{\partial v_x} \Bigg|_{v_x = \omega/k} = -\frac{\frac{\omega}{k} - v_e}{\sqrt{2\pi} v_{th,e}^3}  e^{-(\omega / k - v_e)^2 / 2v_{th,e}^2}
+$$<p>And now the Landau damping term:</p>
+$$
+-i \pi \frac{\omega_{pe}^2}{k^2} \frac{\partial f_{0_e}}{\partial v_x} \Bigg|_{v_x = \omega/k} = i \sqrt{\frac{\pi}{2}} \frac{\omega_{pe}^2 (\omega - kv_e)}{k^3 v_{th,e}^3} e^{-(\omega / k - v_e)^2 / 2v_{th,e}^2}
+$$<p>Since $\omega/k \ll v_{th,e}$ the exponent goes to 0 and the exponential is just 1.</p>
+$$
+-i \pi \frac{\omega_{pe}^2}{k^2} \frac{\partial f_{0_e}}{\partial v_x} \Bigg|_{v_x = \omega/k} \approx i \sqrt{\frac{\pi}{2}} \frac{\omega_{pe}^2 (\omega - kv_e)}{k^3 v_{th,e}^3}
+$$<p>Compare the above with the Landau damping term without drift Maxwellian electrons:</p>
+$$
+i \sqrt{\frac{\pi}{2}} \frac{\omega_{pe}^2 \omega}{k^3 v_{th,e}^3}
+$$<p>We can note that $\omega$ is replaced by $\omega - k v_e$ when introducing those drifting Maxwellian electrons. So we impose the following fraction:</p>
+$$
+\frac{\omega - kv_e}{\omega} = 1 - \frac{k v_e}{\omega}
+$$<p>For an ion acoustic wave, $\omega_r = kc_s$. As such we have our drift factor for our electron term:</p>
+$$
+\frac{\omega - kv_e}{\omega} = 1 - \frac{v_e}{c_s}
+$$<p>Let&rsquo;s take a look again at the Landau damping rate for acoustic waves. The electron term is on the left and ion term on the right.</p>
+$$
+\gamma_{L_i} = \frac{1}{2} \sqrt{\frac{\pi}{2}} k c_s \left(\sqrt{\frac{m_e}{m_i}} + \left(\frac{T_e}{T_i} \right)^{3/2} e^{-T_e / 2T_i} \right)
+$$<p>With some mathematical magic we multiply the electron term here with the drift factor we&rsquo;ve derived.</p>
+$$
+\gamma_{L_i, \text{drift}} = \frac{1}{2} \sqrt{\frac{\pi}{2}} k c_s \left(\sqrt{\frac{m_e}{m_i}} \left(1 - \frac{v_e}{c_s} \right) + \left(\frac{T_e}{T_i} \right)^{3/2} e^{-T_e / 2T_i} \right)
+$$<p>The wave becomes unstable when the damping changes sign at threshold $\gamma = 0$:</p>
+$$
+\gamma_{L_i, \text{drift}} = 0 = \sqrt{\frac{m_e}{m_i}} \left(1 - \frac{v_e}{c_s} \right) + \left(\frac{T_e}{T_i} \right)^{3/2} e^{-T_e / 2T_i}
+$$$$
+\frac{v_e}{c_s} = 1 + \sqrt{\frac{m_i}{m_e}} \left(\frac{T_e}{T_i} \right)^{3/2} e^{-T_e / 2T_i}
+$$$$
+J = e n_0 v_e = e n_0 c_s \left(1 + \sqrt{\frac{m_i}{m_e}} \left(\frac{T_e}{T_i} \right)^{3/2} e^{-T_e / 2T_i} \right)
+$$$$
+\frac{m_i}{m_e} = 1836
+$$$$
+J = e n_0 c_s (1 + \sqrt{1836} (10)^{3/2} e^{-5}) 
+\quad \text{or} \quad = e n_0 c_s (1 + \sqrt{1836} (20)^{3/2} e^{-10}) 
+$$$$
+c_s = \sqrt{\frac{k_b T_e}{m_i}}
+$$<p>Using $T_i = 300 \text{ K}$, $n_0 = 10^{15} \text{ m}^{-3}$ (from Swanson p. 159):</p>
+$$
+J = (1.602 \times 10^{-19}) (10^{15}) \sqrt{\frac{1.381 \times 10^{-23} \times 3000}{1.67 \times 10^{-27}}} (1 + \sqrt{1836} (10^{3/2}) e^{-5}) \quad \text{or} \quad = (1.602 \times 10^{-19}) (10^{15}) \sqrt{\frac{1.381 \times 10^{-23} \times 6000}{1.67 \times 10^{-27}}} (1 + \sqrt{1836} (20^{3/2}) e^{-10})
+$$<p>For $\frac{T_e}{T_i} = 10$:</p>
+$$
+J \approx 8.08 \frac{\text{A}}{\text{m}^2}
+$$<p>For $\frac{T_e}{T_i} = 20$:</p>
+$$
+J \approx 1.32 \frac{\text{A}}{\text{m}^2}
+$$<p>nice</p>
 
 
     
